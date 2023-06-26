@@ -36,8 +36,14 @@ class App extends React.Component {
     this.setState({ winner: null });
     this.emptyArray();
     this._child1.forceUpdateHandler();
-    this._child2.forceUpdateHandler();
-    this._child3.forceUpdateHandler();
+    setTimeout(() => {
+      this._child2.forceUpdateHandler();
+    }, 130)
+    setTimeout(() => {
+      this._child3.forceUpdateHandler();
+    }, 230)
+    // this._child2.forceUpdateHandler();
+    // this._child3.forceUpdateHandler();
 
     // this.getRes().then(() => {
     //   console.log('done1')
@@ -68,6 +74,8 @@ class App extends React.Component {
     App.matches.push(value);
 
     if (App.matches.length === 3) {
+
+      this.props.finish()
       const { winner } = this.state;
       const first = App.matches[0];
       let results = App.matches.every(match => match === first)
@@ -80,50 +88,18 @@ class App extends React.Component {
   }
 
 
-  getRes() {
-    return new Promise(res => {
-      setTimeout(() => {
-        res()
-      }, 3000)
-    })
-  }
 
-  componentDidMount() {
-    // this.getRes().then(() => {
-    //   console.log('done')
 
-    //   this.setState({
-    //     a: [1, 2, 4]
-    //   })
-    // })
-  }
+
 
   render() {
-    const { winner } = this.state;
-    const getLoser = () => {
-      return App.loser[Math.floor(Math.random() * App.loser.length)]
-    }
-    let repeatButton = null;
-    let winningSound = null;
-
-    if (winner !== null) {
-      repeatButton = <RepeatButton onClick={this.handleClick} />
-    }
-
-    if (winner) {
-      winningSound = <WinningSound />
-    }
-
     const { a } = this.props
     return (
       <div>
-        {winningSound}
-
-
         <div className={`spinner-container`}>
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z="a" target={a[0]} />
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" z="b" target={a[1]} />
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z="c" target={a[2]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z={1} target={a[0]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" z={2} target={a[1]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z={4} target={a[2]} />
           <div className="gradient-fade"></div>
         </div>
       </div>

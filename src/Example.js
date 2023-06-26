@@ -18,7 +18,7 @@ class Example extends React.Component {
       console.log('done1')
 
       this.setState({
-        a: [1, 2, 8]
+        a: [Math.floor(Math.random() * (10)), Math.floor(Math.random() * (10)), Math.floor(Math.random() * (10))]
       })
     })
   }
@@ -27,13 +27,17 @@ class Example extends React.Component {
     return new Promise(res => {
       setTimeout(() => {
         res()
-      }, 3000)
+      }, 10200)
     })
+  }
+
+  finish = () => {
+    console.log('完成一次')
   }
 
   render() {
     return <div>
-      <App ref={(app) => { this._app = app; }} a={this.state.a} />
+      <App ref={(app) => { this._app = app; }} a={this.state.a} finish={this.finish} />
       <button
         aria-label='Play again.'
         id='repeatButton'

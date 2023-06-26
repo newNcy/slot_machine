@@ -7,9 +7,9 @@ class Spinner extends React.Component {
   };
 
   componentDidMount() {
-    // this.setState({
-    //   position: -188 * this.props.target - 1692
-    // })
+    this.setState({
+      position: this.setStartPosition()
+    })
     // this.reset()
     // clearInterval(this.timer);
 
@@ -33,14 +33,14 @@ class Spinner extends React.Component {
       clearInterval(this.timer);
     }
 
-    this.start = this.setStartPosition();
+    // this.start = this.setStartPosition();
 
     this.startTime = Date.now()
 
-    this.setState({
-      position: this.start,
-      timeRemaining: this.props.timer
-    });
+    // this.setState({
+    // position: this.state.position + 1692 * 10,
+    // timeRemaining: this.props.timer
+    // });
 
     this.timer = setInterval(() => {
       this.tick()
@@ -54,7 +54,7 @@ class Spinner extends React.Component {
 
   lastPosition = null
   static iconHeight = 188;
-  multiplier = Math.floor(Math.random() * (4 - 1) + 1);
+  multiplier = Math.floor(Math.random() * (4 - 1) + 3);
 
   // start = this.setStartPosition();
 
@@ -63,7 +63,7 @@ class Spinner extends React.Component {
     return ((Math.floor((Math.random() * 9))) * Spinner.iconHeight) * -1;
   }
 
-  speed = Spinner.iconHeight * this.multiplier;
+  speed = Spinner.iconHeight * 2//* this.multiplier;
   moveBackground() {
     const nextPosition = this.state.position - this.speed
     this.setState({
@@ -100,7 +100,7 @@ class Spinner extends React.Component {
 
       const x = this.props.target >= (curIndex) ? this.props.target - curIndex : 9 + this.props.target - curIndex
 
-      this.lastPosition = this.state.position - 188 * x - this.multiplier * 1692 * this.multiplier
+      this.lastPosition = this.state.position - 188 * x - this.props.z * 1692
 
       console.log('开始计算', this.props.target, this.state.position, curIndex, this.lastPosition)
 
