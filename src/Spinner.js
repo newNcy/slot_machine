@@ -63,7 +63,7 @@ class Spinner extends React.Component {
     return ((Math.floor((Math.random() * 9))) * Spinner.iconHeight) * -1;
   }
 
-  speed = Spinner.iconHeight * 1;
+  speed = Spinner.iconHeight * this.multiplier;
   moveBackground() {
     const nextPosition = this.state.position - this.speed
     this.setState({
