@@ -25,7 +25,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      winner: null,
+      winner: [],
       a: []
     }
     this.finishHandler = this.finishHandler.bind(this)
@@ -47,7 +47,7 @@ class App extends React.Component {
       console.log('done1')
 
       this.setState({
-        a: [2, 2, 2]
+        a: [1, 2, 4]
       })
     })
 
@@ -93,13 +93,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getRes().then(() => {
-      console.log('done')
+    // this.getRes().then(() => {
+    //   console.log('done')
 
-      this.setState({
-        a: [1, 2, 4]
-      })
-    })
+    //   this.setState({
+    //     a: [1, 2, 4]
+    //   })
+    // })
   }
 
   render() {
@@ -115,7 +115,6 @@ class App extends React.Component {
     }
 
     if (winner) {
-      console.log()
       winningSound = <WinningSound />
     }
 

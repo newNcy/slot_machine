@@ -10,7 +10,7 @@ class Spinner extends React.Component {
     // this.setState({
     //   position: -188 * this.props.target - 1692
     // })
-    this.reset()
+    // this.reset()
     // clearInterval(this.timer);
 
     // this.setState({
@@ -100,7 +100,7 @@ class Spinner extends React.Component {
 
         const x = this.props.target >= (curIndex) ? this.props.target - curIndex : 9 + this.props.target - curIndex
 
-        this.lastPosition = this.state.position - 188 * x - this.multiplier * 1692
+        this.lastPosition = this.state.position - 188 * x //- this.multiplier * 1692
 
         console.log('开始计算', this.props.target, this.state.position, curIndex, this.lastPosition)
 
