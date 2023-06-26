@@ -35,21 +35,17 @@ class App extends React.Component {
   handleClick() {
     this.setState({ winner: null });
     this.emptyArray();
-    this.setState({
-      a: []
-    }, () => {
-      this._child1.forceUpdateHandler();
-      this._child2.forceUpdateHandler();
-      this._child3.forceUpdateHandler();
-    })
+    this._child1.forceUpdateHandler();
+    this._child2.forceUpdateHandler();
+    this._child3.forceUpdateHandler();
 
-    this.getRes().then(() => {
-      console.log('done1')
+    // this.getRes().then(() => {
+    //   console.log('done1')
 
-      this.setState({
-        a: [1, 2, 4]
-      })
-    })
+    //   this.setState({
+    //     a: [1, 2, 4]
+    //   })
+    // })
 
   }
 
@@ -118,13 +114,11 @@ class App extends React.Component {
       winningSound = <WinningSound />
     }
 
-    const { a } = this.state
+    const { a } = this.props
     return (
       <div>
         {winningSound}
-        <h1 style={{ color: 'white' }}>
-          <span>{winner === null ? 'Waiting…' : winner ? '🤑 Pure skill! 🤑' : getLoser()}</span>
-        </h1>
+
 
         <div className={`spinner-container`}>
           <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z="a" target={a[0]} />
@@ -132,7 +126,6 @@ class App extends React.Component {
           <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z="c" target={a[2]} />
           <div className="gradient-fade"></div>
         </div>
-        {repeatButton}
       </div>
     );
   }

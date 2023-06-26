@@ -92,35 +92,32 @@ class Spinner extends React.Component {
 
   tick() {
     // 最少滚动1s
-    if ((Date.now() - this.startTime) >= 1000) {
-      // 每次监测结果传入，从而计算最终位置
-      if (!isNaN(this.props.target) && !this.lastPosition) {
-        const curRate = this.state.position / -188
-        const curIndex = curRate % 9 + 1
+    // if ((Date.now() - this.startTime) >= 1000) {
+    // 每次监测结果传入，从而计算最终位置
+    if (!isNaN(this.props.target) && !this.lastPosition) {
+      const curRate = this.state.position / -188
+      const curIndex = curRate % 9 + 1
 
-        const x = this.props.target >= (curIndex) ? this.props.target - curIndex : 9 + this.props.target - curIndex
+      const x = this.props.target >= (curIndex) ? this.props.target - curIndex : 9 + this.props.target - curIndex
 
-        this.lastPosition = this.state.position - 188 * x //- this.multiplier * 1692
+      this.lastPosition = this.state.position - 188 * x - this.multiplier * 1692 * this.multiplier
 
-        console.log('开始计算', this.props.target, this.state.position, curIndex, this.lastPosition)
+      console.log('开始计算', this.props.target, this.state.position, curIndex, this.lastPosition)
 
-      } else {
-        console.log(this.state.position, this.lastPosition)
-        if (this.state.position <= this.lastPosition && this.lastPosition !== null) {
-          clearInterval(this.timer);
-          this.lastPosition = null
-          // this.getSymbolFromPosition();
-          console.log(`${this.props.z}已经计算完成`, this.lastPosition)
-          this.props.onFinish(this.state.position % -9);
-          return
-        } else {
-          console.log(this.state.position, this.lastPosition)
-        }
-        // console.log(this.start, this.speed, this.state.position)
-        // clearInterval(this.timer);
+    } else {
+      if (this.state.position <= this.lastPosition && this.lastPosition !== null) {
+        clearInterval(this.timer);
+        this.lastPosition = null
+        // this.getSymbolFromPosition();
+        console.log(`${this.props.z}已经计算完成`, this.lastPosition)
+        this.props.onFinish(this.state.position % -9);
+        return
       }
-
+      // console.log(this.start, this.speed, this.state.position)
+      // clearInterval(this.timer);
     }
+
+    // }
     this.moveBackground();
 
   }
