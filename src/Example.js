@@ -1,24 +1,25 @@
 import React from 'react'
-import App from './App'
+import SlotMachine from './SlotMachine'
 
 class Example extends React.Component {
   state = {
-    a: []
+    result: []
   }
 
   start = () => {
-    console.log(2)
-
     this.setState({
-      a: []
+      result: []
     }, () => {
       this._app.handleClick()
     })
-    this.getRes().then(() => {
-      console.log('done1')
 
+    this.getRes().then(() => {
+      console.log('done')
+      const res = [Math.floor(Math.random() * (10)), Math.floor(Math.random() * (10)), Math.floor(Math.random() * (10))]
+
+      console.log(res)
       this.setState({
-        a: [Math.floor(Math.random() * (10)), Math.floor(Math.random() * (10)), Math.floor(Math.random() * (10))]
+        result: res
       })
     })
   }
@@ -31,13 +32,14 @@ class Example extends React.Component {
     })
   }
 
+  // 完成回调
   finish = () => {
     console.log('完成一次')
   }
 
   render() {
     return <div>
-      <App ref={(app) => { this._app = app; }} a={this.state.a} finish={this.finish} />
+      <SlotMachine ref={(app) => { this._app = app; }} result={this.state.result} onFinished={this.finish} />
       <button
         aria-label='Play again.'
         id='repeatButton'

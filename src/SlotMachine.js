@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Spinner from './Spinner'
-import './App.css';
+import './SlotMachine.css';
 
 function RepeatButton(props) {
   return (
@@ -26,7 +26,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       winner: [],
-      a: []
+      result: []
     }
     this.finishHandler = this.finishHandler.bind(this)
     this.handleClick = this.handleClick.bind(this);
@@ -42,16 +42,7 @@ class App extends React.Component {
     setTimeout(() => {
       this._child3.forceUpdateHandler();
     }, 230)
-    // this._child2.forceUpdateHandler();
-    // this._child3.forceUpdateHandler();
 
-    // this.getRes().then(() => {
-    //   console.log('done1')
-
-    //   this.setState({
-    //     a: [1, 2, 4]
-    //   })
-    // })
 
   }
 
@@ -75,7 +66,7 @@ class App extends React.Component {
 
     if (App.matches.length === 3) {
 
-      this.props.finish()
+      this.props.onFinished()
       const { winner } = this.state;
       const first = App.matches[0];
       let results = App.matches.every(match => match === first)
@@ -87,19 +78,14 @@ class App extends React.Component {
     App.matches = [];
   }
 
-
-
-
-
-
   render() {
-    const { a } = this.props
+    const { result } = this.props
     return (
       <div>
         <div className={`spinner-container`}>
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z={1} target={a[0]} />
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" z={2} target={a[1]} />
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z={4} target={a[2]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z={1} target={result[0]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" z={2} target={result[1]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z={4} target={result[2]} />
           <div className="gradient-fade"></div>
         </div>
       </div>
