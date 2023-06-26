@@ -15,8 +15,8 @@ function RepeatButton(props) {
 
 function WinningSound() {
   return (
-    <audio autoplay="autoplay" className="player" preload="false">
-      <source src="https://andyhoffman.codes/random-assets/img/slots/winning_slot.wav" />
+    <audio autoplay className="player" preload="false">
+      <source src="../public/winning_slot.wav" />
     </audio>
   );
 }
@@ -25,7 +25,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      winner: null
+      winner: null,
+      a: []
     }
     this.finishHandler = this.finishHandler.bind(this)
     this.handleClick = this.handleClick.bind(this);
@@ -34,9 +35,22 @@ class App extends React.Component {
   handleClick() {
     this.setState({ winner: null });
     this.emptyArray();
-    this._child1.forceUpdateHandler();
-    this._child2.forceUpdateHandler();
-    this._child3.forceUpdateHandler();
+    this.setState({
+      a: []
+    }, () => {
+      this._child1.forceUpdateHandler();
+      this._child2.forceUpdateHandler();
+      this._child3.forceUpdateHandler();
+    })
+
+    this.getRes().then(() => {
+      console.log('done1')
+
+      this.setState({
+        a: [2, 2, 2]
+      })
+    })
+
   }
 
   static loser = [
@@ -69,6 +83,25 @@ class App extends React.Component {
     App.matches = [];
   }
 
+
+  getRes() {
+    return new Promise(res => {
+      setTimeout(() => {
+        res()
+      }, 3000)
+    })
+  }
+
+  componentDidMount() {
+    this.getRes().then(() => {
+      console.log('done')
+
+      this.setState({
+        a: [1, 2, 4]
+      })
+    })
+  }
+
   render() {
     const { winner } = this.state;
     const getLoser = () => {
@@ -82,9 +115,11 @@ class App extends React.Component {
     }
 
     if (winner) {
+      console.log()
       winningSound = <WinningSound />
     }
 
+    const { a } = this.state
     return (
       <div>
         {winningSound}
@@ -93,9 +128,9 @@ class App extends React.Component {
         </h1>
 
         <div className={`spinner-container`}>
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z="a" />
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" z="b" />
-          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z="c" />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z="a" target={a[0]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" z="b" target={a[1]} />
+          <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z="c" target={a[2]} />
           <div className="gradient-fade"></div>
         </div>
         {repeatButton}
