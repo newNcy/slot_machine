@@ -33,14 +33,14 @@ class Spinner extends React.Component {
       clearInterval(this.timer);
     }
 
-    // this.start = this.setStartPosition();
+    this.start = this.setStartPosition();
 
     this.startTime = Date.now()
 
-    // this.setState({
-    // position: this.state.position + 1692 * 10,
-    // timeRemaining: this.props.timer
-    // });
+    this.setState({
+      position: this.start,
+      timeRemaining: this.props.timer
+    });
 
     this.timer = setInterval(() => {
       this.tick()

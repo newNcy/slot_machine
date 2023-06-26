@@ -27,7 +27,7 @@ class Example extends React.Component {
     return new Promise(res => {
       setTimeout(() => {
         res()
-      }, 10200)
+      }, 1200)
     })
   }
 
