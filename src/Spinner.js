@@ -33,7 +33,7 @@ class Spinner extends React.Component {
       clearInterval(this.timer);
     }
 
-    this.start = this.setStartPosition();
+    this.start = this.setStartPosition() + 10 * 1692;
 
     this.startTime = Date.now()
 

@@ -85,9 +85,9 @@ h1 span {
 .gradient-fade {
   position: absolute;
   top: 32px;
-  right: 32px;
+  right: 30px;
   bottom: 32px;
-  left: 32px;
+  left: 30px;
   background: linear-gradient(
     to bottom, 
     rgba(64,64,64,1) 0%, 
