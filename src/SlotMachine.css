@@ -39,7 +39,7 @@ h1 span {
 .icons { 
   display: inline-block;
   width: 128px;
-  height: 564px;
+  height: 188px;
   overflow: hidden;
   background: #fff url(../public/sprite5.png) repeat-y;
   will-change: backgroundPosition;
@@ -56,8 +56,7 @@ h1 span {
 
 .spinner-container {
   overflow: hidden;
-  height: 632px;  
-  padding: 2em;
+  height: 188px;  
   transform: translate(-50%, -50%) scale(.62, .62);
   position: absolute;
   top: 50%;
@@ -74,25 +73,24 @@ h1 span {
   position: absolute;
   content: '';
   display: block;
-  height: 180px;
+  height: 188px;
   top: 50%;
   transform: translateY(-50%);
-  right: 30px;
-  left: 30px;
-  background: rgba(255, 0, 0, .1);  
+  right: 0px;
+  left: 0px;
 }
 
 .gradient-fade {
   position: absolute;
-  top: 32px;
-  right: 30px;
-  bottom: 32px;
-  left: 30px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
   background: linear-gradient(
     to bottom, 
     rgba(64,64,64,1) 0%, 
-    rgba(64,64,64,0) 7%, 
-    rgba(64,64,64,0) 93%, 
+    rgba(64,64,64,0) 30%, 
+    rgba(64,64,64,0) 70%, 
     rgba(64,64,64,1) 100%
   );
 }
