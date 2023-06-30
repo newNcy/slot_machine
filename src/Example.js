@@ -1,6 +1,10 @@
 import React from 'react'
 import SlotMachine from './SlotMachine'
 
+
+async function getRes() {
+}
+
 class Example extends React.Component {
   state = {
     result: []
@@ -28,7 +32,7 @@ class Example extends React.Component {
     return new Promise(res => {
       setTimeout(() => {
         res()
-      }, 1200)
+      }, 3000)
     })
   }
 
@@ -38,11 +42,12 @@ class Example extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className="bg-blue-300">
       <SlotMachine ref={(app) => { this._app = app; }} result={this.state.result} onFinished={this.finish} />
       <button
         aria-label='Play again.'
         id='repeatButton'
+          className = "bg-red-300"
         onClick={this.start}>
       </button>
     </div>
