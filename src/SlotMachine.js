@@ -81,11 +81,13 @@ class App extends React.Component {
   render() {
     const { result } = this.props
     return (
+        <div>
         <div className={`spinner-container`}>
           <Spinner onFinish={this.finishHandler} ref={(child) => { this._child1 = child; }} timer="1000" z={1} target={result[0]} />
           <Spinner onFinish={this.finishHandler} ref={(child) => { this._child2 = child; }} timer="1400" z={2} target={result[1]} />
           <Spinner onFinish={this.finishHandler} ref={(child) => { this._child3 = child; }} timer="2200" z={4} target={result[2]} />
           <div className="gradient-fade"></div>
+        </div>
         </div>
     );
   }

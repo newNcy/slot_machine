@@ -61,7 +61,7 @@ h1 span {
   overflow: hidden;
   padding-top:2px;
   padding-bottom:2px;
-  position: absolute;
+  position: relative;
   display: flex;
   transition: 0.3s transform;
   @apply w-fit;
@@ -72,7 +72,6 @@ h1 span {
 }
 
 .spinner-container::after {
-  position: absolute;
   content: '';
   display: block;
   height: 188px;
@@ -84,7 +83,6 @@ h1 span {
 }
 
 .gradient-fade {
-  position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -100,12 +98,11 @@ h1 span {
 
 @media screen and (max-width: 1000px) {
   .spinner-container {
-    transform: translate(-50%, -50%) scale(.55, .55);
   }
 }
 
 @media screen and (max-width: 500px) {
   .spinner-container {
-    transform: translate(-50%, -50%) scale(.4, .4);
+    transform: translate(-25%, -25%) scale(.5, .5);
   }
 }
