@@ -39,31 +39,12 @@ h1 span {
   padding: 0.75rem 1rem;
 }
 
-.icons { 
-  display: inline-block;
-  width: 128px;
-  height: 564px;
-  overflow: hidden;
-  background: #fff url(../public/sprite5.png) repeat-y;
-  will-change: backgroundPosition;
-  transition: 0.3s background-position ease-in-out;
-  padding: 0 80px;
-  transform: translateZ(0);
-}
-
-.icons:nth-child(2) {
-  margin: 0 10px;
-}
-
 * { box-sizing: border-box; }
 
 .spinner-container {
   overflow: hidden;
-  padding-top:2px;
-  padding-bottom:2px;
-  position: relative;
   display: flex;
-  transition: 0.3s transform;
+  transition: 0.5 s transform;
   @apply w-fit;
 }
 
@@ -74,9 +55,8 @@ h1 span {
 .spinner-container::after {
   content: '';
   display: block;
-  height: 188px;
-  top: 50%;
-  transform: translateY(-50%);
+  height: 94px;
+  transform: translate(-100%,-50%);
   right: 0px;
   left: 0px;
   background-color:rgba(237, 122, 70, 0.1);
@@ -96,13 +76,3 @@ h1 span {
   );
 }
 
-@media screen and (max-width: 1000px) {
-  .spinner-container {
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .spinner-container {
-    transform: translate(-25%, -25%) scale(.5, .5);
-  }
-}
