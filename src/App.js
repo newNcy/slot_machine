@@ -5,6 +5,22 @@ import './SlotMachine.css'
 import './App.css'
 import bg from './bg.jpg'
 
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { Web3Modal, useWeb3Modal, Web3Button } from '@web3modal/react'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { zkSync } from 'wagmi/chains'
+
+const chains = [zkSync]
+const projectId = 'e6e3bf998bb5a4c034c99d8f0be15420'
+
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: w3mConnectors({ projectId, chains }),
+  publicClient
+})
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
+
 async function sleep(ms){
     return new Promise(r=>{
         setTimeout(r, ms)
@@ -12,7 +28,7 @@ async function sleep(ms){
 }
 
 function Spinner({slot, speed}) {
-    const unit = 56;
+    const unit = 95;
     let [init, setInit] = useState(false)
     let [starting, setStarting] = useState(true)
     let [delta, setDelta] = useState(0)
@@ -100,7 +116,7 @@ function SlotSample({slots, gain}) {
     )
 }
 
-function App () {
+function Main() {
 
     function rs() {
         let r = Math.round(Math.random()*9)
@@ -108,9 +124,11 @@ function App () {
         return r
     }
 
+    let {open, close} = useWeb3Modal()
+
     let [slot1, setSlot1] = useState(0)
     let [slot2, setSlot2] = useState(1)
-    let [slot3, setSlot3] = useState(2)
+    let [slot3, setSlot3] = useState(8)
     let finish = () => {}
     return (
         <div className="h-full w-full min-h-screen" syle={{backgroundImage:`url(${bg})`, backgroundPosition: '50% 50%'}} >
@@ -120,49 +138,77 @@ function App () {
                         Token.ZkPenguin
                     </div>
                     <div>
-                        connect
+                        <Web3Button/>
                     </div>
                 </div>
-                <div className="w-full grid grid-cols-2">
-                    <div className="w-full" >
+                <div className="w-full grid grid-cols-1 md:grid-cols-2">
+                    <div className="p-4">
+                        aaa
                     </div>
-                    <div className="p-4 flex flex-col gap-2">
-                        <SlotMachine slot1={slot1} slot2={slot2} slot3={slot3}/>
-                        <div className="slot-container px-2 py-1">
-                            <div className="flex flex-row justify-between items-center">
-                                <p>weger</p>
-                                <p>gain</p>
+                    <div className="w-full flex flex-row justify-center">
+                        <div className="w-fit p-4 flex flex-col gap-2">
+                            <SlotMachine slot1={slot1} slot2={slot2} slot3={slot3}/>
+                            <div className="slot-container px-2 py-1">
+                                <div className="flex flex-row justify-between items-center">
+                                    <p>weger</p>
+                                    <p>gain</p>
+                                </div>
+                                <div className="flex flex-col gap-1">
+                                    <SlotSample slots={[0, 1, 2]} gain="1000 $zkpn"/>
+                                    <SlotSample slots={[0, 1, 2]}/>
+                                    <SlotSample slots={[0, 1, 2]}/>
+                                </div>
                             </div>
-                            <div className="flex flex-col gap-1">
-                                <SlotSample slots={[0, 1, 2]} gain="1000 $zkpn"/>
-                                <SlotSample slots={[0, 1, 2]}/>
-                                <SlotSample slots={[0, 1, 2]}/>
-                            </div>
-                        </div>
-                        <div className="flex flex-row justify-between w-full">
-                            <div onClick={ async e=> {
-                                if (slot1==null || slot2 == null ||  slot3 == null) 
-                                    return
-                                setSlot1(null)
-                                setSlot2(null)
-                                setSlot3(null)
+                            <div className="flex flex-row justify-between w-full">
+                                <div onClick={ async e=> {
+                                    if (slot1==null || slot2 == null ||  slot3 == null) 
+                                        return
+                                    setSlot1(null)
+                                    setSlot2(null)
+                                    setSlot3(null)
                                 }}> start</div>
-                            <div onClick={ async e=> {
-                                if (slot1!=null || slot2!=null || slot3!=null) 
-                                    return
-                                setSlot1(null)
-                                await sleep(500)
-                                setSlot1(rs())
-                                await sleep(500)
-                                setSlot2(rs())
-                                await sleep(500)
-                                setSlot3(rs())
+                                <div onClick={ async e=> {
+                                    if (slot1!=null || slot2!=null || slot3!=null) 
+                                        return
+                                    setSlot1(null)
+                                    await sleep(500)
+                                    setSlot1(rs())
+                                    await sleep(500)
+                                    setSlot2(rs())
+                                    await sleep(500)
+                                    setSlot3(rs())
                                 }}> stop</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    )
+}
+
+function App() {
+    return (
+        <>
+            <WagmiConfig 
+                config={wagmiConfig}
+            >
+                <Main/>
+            </WagmiConfig>
+
+            <Web3Modal 
+                projectId={projectId} 
+                ethereumClient={ethereumClient} 
+                themeVariables={{
+                    '--w3m-font-family': 'russo one, sans-serif',
+                    '--w3m-accent-color': '#F5841F',
+                    '--w3m-background-color': '#F5841F',
+                    '--w3m-overlay-backdrop-filter': 'blur(5px)',
+                    '--w3m-text-big-bold-size': '1em',
+                    //'--w3m-overlay-background-color':'#F5841F' 
+                }}
+            />
+        </>
     )
 }
 

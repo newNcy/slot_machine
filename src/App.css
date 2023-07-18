@@ -1,7 +1,7 @@
 
 html {
     --container_background_color: hsla(0,0%,50%,.1);
-    @apply h-full;
+    @apply h-full russo;
 
 }
 
@@ -9,13 +9,21 @@ html {
     background-color: var(--container_background_color);
     box-shadow: 0 0 30px rgba(0,0,0,.5);
 }
+
+.norse {
+  font-family:norse, sans-serif;
+}
+
+.russo {
+     font-family: 'russo one', sans-serif;
+}
 .slot { 
     @apply rounded-md;
-    width: 64px;
-    height: 64px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
     background: #fff url(../public/sprite5.png) repeat-y;
-    background-size: 70%;
+    background-size: 75%;
     will-change: backgroundPosition;
     transition: 0.2s background-position linear;
 }
@@ -45,5 +53,5 @@ html {
 
 body {
     height:100%;
-    background: radial-gradient(circle at 50% 0,rgba(237,122, 70,.25),transparent),#000;
+    background: radial-gradient(circle at 100% 0,rgba(237,122, 70,.25),transparent),#000;
 }
