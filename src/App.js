@@ -132,7 +132,7 @@ function Main() {
     let finish = () => {}
     return (
         <div className="h-full w-full min-h-screen" syle={{backgroundImage:`url(${bg})`, backgroundPosition: '50% 50%'}} >
-            <div className=" min-h-screen text-white h-full flex flex-col jusitify-center items-center backdrop-blur-lg" syle={{backgroundColor: 'rgba(0, 0, 0, 0.9)'}}>
+            <div id="body" className="min-h-screen flex text-white h-full flex flex-col jusitify-center items-center backdrop-blur-lg" syle={{backgroundColor: 'rgba(0, 0, 0, 0.9)'}}>
                 <div className="shadow-lg px-4 py-2 text-xl w-full flex flex-row justify-between items-center ">
                     <div >
                         Token.ZkPenguin
@@ -141,45 +141,69 @@ function Main() {
                         <Web3Button/>
                     </div>
                 </div>
-                <div className="w-full grid grid-cols-1 md:grid-cols-2">
-                    <div className="p-4">
-                        aaa
-                    </div>
-                    <div className="w-full flex flex-row justify-center">
-                        <div className="w-fit p-4 flex flex-col gap-2">
-                            <SlotMachine slot1={slot1} slot2={slot2} slot3={slot3}/>
-                            <div className="slot-container px-2 py-1">
-                                <div className="flex flex-row justify-between items-center">
-                                    <p>weger</p>
-                                    <p>gain</p>
+                <div className="flex-1 flex flex-col justify-center">
+                    <div className="container w-full h-fit grid grid-cols-1 md:grid-cols-2">
+                        <div className="p-4 h-full">
+                            <img className="rounded-lg" 
+                                style={{
+                                    backgroundSize : '80%'
+                                }} 
+                                src={bg}/>
+                        </div>
+                        <div className="h-full w-full flex flex-row justify-center items-center">
+                            <div className="w-fit p-4 flex flex-col gap-2">
+                                rule:
+                                <p> 1.every wallet with 0.01eth hold one free shot </p>
+                                <p> 2.every unique zkpenguin hold one free shot </p>
+                                <p> 3.every 0.002 eth can buy one share</p>
+                                <div className="w-full flex flex-row justify-center">
+                                <SlotMachine slot1={slot1} slot2={slot2} slot3={slot3}/>
                                 </div>
-                                <div className="flex flex-col gap-1">
-                                    <SlotSample slots={[0, 1, 2]} gain="1000 $zkpn"/>
-                                    <SlotSample slots={[0, 1, 2]}/>
-                                    <SlotSample slots={[0, 1, 2]}/>
+                                <div className="slot-container px-2 py-1">
+                                    <div className="flex flex-row justify-between items-center">
+                                        <p>weger</p>
+                                        <p>gain</p>
+                                    </div>
+                                    <div className="flex flex-col gap-1">
+                                        <SlotSample slots={[0, 1, 2]} gain="1000 $zkpn"/>
+                                        <SlotSample slots={[0, 1, 2]} gain="800 $zkpn"/>
+                                        <SlotSample slots={[0, 1, 2]}/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex flex-row justify-between w-full">
-                                <div onClick={ async e=> {
-                                    if (slot1==null || slot2 == null ||  slot3 == null) 
-                                        return
-                                    setSlot1(null)
-                                    setSlot2(null)
-                                    setSlot3(null)
-                                }}> start</div>
-                                <div onClick={ async e=> {
-                                    if (slot1!=null || slot2!=null || slot3!=null) 
-                                        return
-                                    setSlot1(null)
-                                    await sleep(500)
-                                    setSlot1(rs())
-                                    await sleep(500)
-                                    setSlot2(rs())
-                                    await sleep(500)
-                                    setSlot3(rs())
-                                }}> stop</div>
+                                <div className="flex flex-row justify-between w-full">
+                                    <div onClick={ async e=> {
+                                        if (slot1==null || slot2 == null ||  slot3 == null) 
+                                            return
+                                        setSlot1(null)
+                                        setSlot2(null)
+                                        setSlot3(null)
+                                    }}> start</div>
+                                    <div onClick={ async e=> {
+                                        if (slot1!=null || slot2!=null || slot3!=null) 
+                                            return
+                                        setSlot1(null)
+                                        await sleep(500)
+                                        setSlot1(rs())
+                                        await sleep(500)
+                                        setSlot2(rs())
+                                        await sleep(500)
+                                        setSlot3(rs())
+                                    }}> stop</div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="flex flex-col justify-center items-center px-4">
+                        <div className="w-full bg-red-300 h-1 mx-4 my-6">
+                        </div>
+                        <div>
+                            66666666666/888888888888888
+                        </div>
+                    </div>
+                </div>
+                <div className="shadow-lg px-4 py-3 text-md w-full flex flex-row justify-center items-center ">
+                    <div >
+                        @copyright Zkpenguin
                     </div>
                 </div>
             </div>
@@ -200,7 +224,7 @@ function App() {
                 projectId={projectId} 
                 ethereumClient={ethereumClient} 
                 themeVariables={{
-                    '--w3m-font-family': 'russo one, sans-serif',
+                    //'--w3m-font-family': 'russo one, sans-serif',
                     '--w3m-accent-color': '#F5841F',
                     '--w3m-background-color': '#F5841F',
                     '--w3m-overlay-backdrop-filter': 'blur(5px)',
